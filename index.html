@@ -1,48 +1,9 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlobalCorp - E-Commerce Solutions</title>
+  <title>Anwir Inc. - Content E-Commerce Live Streaming</title>
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.5/babel.min.js"></script>
@@ -178,47 +139,47 @@
         testimonials: "Testimonials",
         cooperation: "Cooperation",
         contactUsNav: "Contact Us",
-        companyName: "GlobalCorp",
-        intro: "Since its founding in 2015, GlobalCorp has been a blazing force in global e-commerce, born in the vibrant heart of Shanghai. We’re driven by a fiery passion to revolutionize shopping through live streaming commerce, cross-border e-commerce, and TikTok Shop integrations. Our mission is to light up the world with dynamic, tech-fueled experiences, connecting brands and customers with the power of AI analytics, seamless logistics, and a splash of colorful creativity.",
-        vision: "We dream of a dazzling, borderless marketplace where every business radiates with energy and joy.",
-        techStrength: "Fueled by AI, blockchain, and real-time analytics, we deliver solutions that spark excitement and innovation.",
-        crossBorder: "Cross-Border E-Commerce",
-        crossBorderDesc: "We ignite global trade with vibrant efficiency—offering logistics, multi-currency support, and customs solutions to make international sales sizzle.",
-        liveStreaming: "Live Streaming Commerce",
-        liveStreamingDesc: "Turn up the heat with live streams on TikTok and YouTube, captivating audiences with electrifying product showcases in real-time.",
+        companyName: "Anwir Inc.",
+        intro: "Anwir Inc. is a leading company in content e-commerce live streaming, providing innovative solutions for businesses to engage with their customers through interactive live streams.",
+        vision: "We envision a world where businesses can connect with their customers in real-time, creating engaging and interactive shopping experiences.",
+        techStrength: "Leveraging cutting-edge technology, including AI and real-time analytics, we deliver solutions that drive engagement and sales.",
+        crossBorder: "Content E-Commerce Live Streaming",
+        crossBorderDesc: "Anwir Inc. offers comprehensive content e-commerce live streaming services, including live stream production, influencer marketing, and real-time analytics.",
+        liveStreaming: "Live Streaming Solutions",
+        liveStreamingDesc: "Our live streaming solutions enable businesses to showcase their products in real-time, engaging with customers and driving sales.",
         liveStreamingLink: "Join Our Live Stream: https://www.youtube.com/live/abc123",
-        tiktokCommerce: "TikTok E-Commerce",
-        tiktokCommerceDesc: "Set TikTok ablaze with viral videos and affiliate programs on TikTok Shop, reaching millions with a burst of colorful energy.",
+        tiktokCommerce: "Social Media Integration",
+        tiktokCommerceDesc: "We integrate with popular social media platforms to maximize reach and engagement for your live streams.",
         achievements: "Our Achievements",
-        achievementsDesc: "GlobalCorp has empowered over 500 brands to shine on TikTok Shop, with live streaming campaigns reaching 10 million viewers globally. Our cross-border solutions have facilitated $50M in international sales, connecting markets from Shanghai to New York with seamless logistics and AI-driven insights.",
+        achievementsDesc: "Anwir Inc. has helped numerous businesses increase their sales and customer engagement through our innovative live streaming solutions.",
         productCategories: "Product Categories",
-        productDesc: "Dive into our radiant collection—fashion, electronics, and beauty products—designed to dazzle global markets.",
+        productDesc: "Anwir Inc. provides a range of products for content e-commerce live streaming, including live streaming equipment, software, and accessories.",
         watchVideo: "Watch Product Video",
-        testimonialsDesc: "Hear from our partners and influencers who’ve experienced the GlobalCorp difference.",
-        testimonial1: "“GlobalCorp’s live streaming campaigns skyrocketed our brand visibility on TikTok. We reached 1M views in a single session!” — Sarah L., Fashion Brand CEO",
-        testimonial2: "“Their cross-border logistics made selling to Europe a breeze. GlobalCorp truly lights up global commerce!” — Mark T., Electronics Retailer",
-        testimonial3: "“Partnering with GlobalCorp for TikTok Shop was a game-changer. Their affiliate program doubled our sales!” — Aisha K., Beauty Influencer",
+        testimonialsDesc: "Hear from our satisfied clients who have experienced the power of Anwir Inc.'s content e-commerce live streaming solutions.",
+        testimonial1: "“Anwir Inc.'s live streaming solutions have transformed our business, increasing our sales and customer engagement.” — John D., Retail CEO",
+        testimonial2: "“Their expertise in content e-commerce live streaming is unmatched. We highly recommend Anwir Inc.” — Jane S., Marketing Director",
+        testimonial3: "“Partnering with Anwir Inc. has been a game-changer for our business. Their solutions are top-notch.” — Alex P., E-Commerce Manager",
         coopModel: "Cooperation Model",
-        coopDesc: "Let’s set the world on fire together! Join us for live commerce events, affiliate programs, and global expansion strategies that spark growth.",
-        coopCta: "Ready to ignite your brand’s potential? Partner with GlobalCorp to launch viral TikTok campaigns, streamline cross-border sales, or host live streaming events that captivate global audiences. Contact us today to explore opportunities!",
+        coopDesc: "Partner with Anwir Inc. to take your content e-commerce live streaming to the next level. We offer customized solutions tailored to your business needs.",
+        coopCta: "Ready to enhance your business with live streaming? Contact Anwir Inc. today to explore our solutions.",
         contactUs: "Contact Us",
         contactInfo: `
-          <div class="contact-item"><i class='fas fa-envelope contact-icon'></i> Email: <a href='mailto:info@globalcorp.com' class='text-blue-600 hover:text-red-500'>info@globalcorp.com</a></div>
-          <div class="contact-item"><i class='fas fa-phone contact-icon'></i> Phone: <a href='tel:+11234567890' class='text-blue-600 hover:text-red-500'>+1-123-456-7890</a></div>
-          <div class="contact-item"><i class='fab fa-whatsapp contact-icon'></i> WhatsApp: <a href='https://wa.me/11234567891' target='_blank' class='text-blue-600 hover:text-red-500'>+1-123-456-7891</a></div>
-          <div class="contact-item"><i class='fab fa-linkedin contact-icon'></i> LinkedIn: <a href='https://linkedin.com/company/globalcorp' target='_blank' class='text-blue-600 hover:text-red-500'>linkedin.com/company/globalcorp</a></div>
-          <div class="contact-item"><i class='fab fa-tiktok contact-icon'></i> TikTok: <a href='https://tiktok.com/@globalcorp' target='_blank' class='text-blue-600 hover:text-red-500'>@globalcorp</a></div>
-          <div class="contact-item"><i class='fab fa-youtube contact-icon'></i> YouTube: <a href='https://youtube.com/@globalcorp' target='_blank' class='text-blue-600 hover:text-red-500'>@globalcorp</a></div>
+          <div class="contact-item"><i class='fas fa-envelope contact-icon'></i> Email: <a href='mailto:anwirinc@gmail.com' class='text-blue-600 hover:text-red-500'>anwirinc@gmail.com</a></div>
+          <div class="contact-item"><i class='fas fa-phone contact-icon'></i> Phone: <a href='tel:+17146504577' class='text-blue-600 hover:text-red-500'>+1 (714) 650-4577</a></div>
+          <div class="contact-item"><i class='fab fa-whatsapp contact-icon'></i> WhatsApp: <a href='https://wa.me/17146504577' target='_blank' class='text-blue-600 hover:text-red-500'>+1 (714) 650-4577</a></div>
+          <div class="contact-item"><i class='fab fa-linkedin contact-icon'></i> LinkedIn: <a href='https://linkedin.com/company/anwirinc' target='_blank' class='text-blue-600 hover:text-red-500'>linkedin.com/company/anwirinc</a></div>
+          <div class="contact-item"><i class='fab fa-tiktok contact-icon'></i> TikTok: <a href='https://tiktok.com/@anwirinc' target='_blank' class='text-blue-600 hover:text-red-500'>@anwirinc</a></div>
+          <div class="contact-item"><i class='fab fa-youtube contact-icon'></i> YouTube: <a href='https://youtube.com/@anwirinc' target='_blank' class='text-blue-600 hover:text-red-500'>@anwirinc</a></div>
         `,
         learnMore: "Learn More",
         footer: {
           privacy: "Privacy Policy",
           terms: "Terms of Use",
           cookies: "Cookie Policy",
-          rights: "© 2025 GlobalCorp. All rights reserved.",
-          privacyContent: "At GlobalCorp, your privacy is our priority. We collect data like browsing history, live stream interactions, and purchase details to enhance your experience across our live streaming, cross-border e-commerce, and TikTok Shop services. We handle shipping and payment data securely, complying with GDPR, CCPA, and China’s PIPL. You can manage your data preferences or opt out of sharing at any time. For inquiries, reach us at privacy@globalcorp.com. Last updated: May 28, 2025.",
-          termsContent: "By engaging with GlobalCorp’s services, you agree to our terms. We offer live streaming commerce, cross-border e-commerce, and TikTok Shop integrations, but are not liable for third-party platform disruptions (e.g., TikTok, YouTube). Transactions are subject to our refund policy, and international orders may incur customs fees. Disputes will be resolved under Shanghai jurisdiction. We reserve the right to update these terms as needed. Last updated: May 28, 2025.",
-          cookiesContent: "We use cookies to bring vibrancy to your experience—tracking live stream engagement, analyzing TikTok Shop performance, and personalizing ads. Essential cookies ensure smooth cross-border checkouts, while optional ones power dynamic features like targeted live stream promotions. Manage your preferences in our Cookie Settings or opt out anytime. Last updated: May 28, 2025."
+          rights: "© 2025 Anwir Inc. All rights reserved.",
+          privacyContent: "At Anwir Inc., we value your privacy. We collect data to improve our services and ensure a seamless experience. For more details, please contact us at privacy@anwirinc.com.",
+          termsContent: "By using Anwir Inc.'s services, you agree to our terms. We provide live streaming solutions but are not liable for third-party platform issues. For full terms, please contact us.",
+          cookiesContent: "We use cookies to enhance your experience. You can manage your cookie preferences in our settings."
         }
       },
       zh: {
@@ -228,47 +189,47 @@
         testimonials: "客户评价",
         cooperation: "合作",
         contactUsNav: "联系我们",
-        companyName: "全球公司",
-        intro: "自2015年以来，全球公司一直是全球电商的一股炽热力量，诞生于上海充满活力的中心。我们怀着火热的激情，通过直播带货、跨境电商和TikTok电商整合，革新购物体验。我们的使命是用动态、技术驱动的体验点亮世界，通过AI分析、无缝物流和五彩缤纷的创意，将品牌与客户连接起来。",
-        vision: "我们梦想打造一个耀眼的、无国界的市场，让每家企业都绽放出活力与快乐。",
-        techStrength: "在AI、区块链和实时分析的驱动下，我们提供激发兴奋与创新的解决方案。",
-        crossBorder: "跨境电商",
-        crossBorderDesc: "我们以充满活力的效率点燃全球贸易，提供物流、多货币支持和海关解决方案，让国际销售更加火热。",
-        liveStreaming: "直播带货",
-        liveStreamingDesc: "通过TikTok和YouTube上的直播点燃您的销售，以实时产品展示吸引观众，带来震撼体验。",
+        companyName: "Anwir Inc.",
+        intro: "Anwir Inc. 是内容电商直播领域的领先公司，为企业提供创新的解决方案，通过互动直播与客户互动。",
+        vision: "我们展望一个企业能够实时与客户连接，创造引人入胜和互动的购物体验的世界。",
+        techStrength: "利用尖端技术，包括人工智能和实时分析，我们提供推动参与和销售的解决方案。",
+        crossBorder: "内容电商直播",
+        crossBorderDesc: "Anwir Inc. 提供全面的内容电商直播服务，包括直播制作、网红营销和实时分析。",
+        liveStreaming: "直播解决方案",
+        liveStreamingDesc: "我们的直播解决方案使企业能够实时展示产品，与客户互动并推动销售。",
         liveStreamingLink: "加入我们的直播: https://www.youtube.com/live/abc123",
-        tiktokCommerce: "TikTok电商",
-        tiktokCommerceDesc: "通过TikTok Shop上的病毒式视频和联盟计划点燃潮流，以五彩的能量触达数百万用户。",
+        tiktokCommerce: "社交媒体整合",
+        tiktokCommerceDesc: "我们与流行的社交媒体平台整合，以最大化您的直播的覆盖面和参与度。",
         achievements: "我们的成就",
-        achievementsDesc: "全球公司已助力超过500个品牌在TikTok Shop上大放异彩，直播活动覆盖全球1000万观众。我们的跨境解决方案促成了5000万美元的国际销售，通过无缝物流和AI驱动的洞察，将上海与纽约等市场连接起来。",
+        achievementsDesc: "Anwir Inc. 通过我们创新的直播解决方案帮助众多企业提高了销售和客户参与度。",
         productCategories: "产品分类",
-        productDesc: "探索我们耀眼的系列—时尚、电子产品和美妆—专为全球市场设计，令人眼花缭乱。",
+        productDesc: "Anwir Inc. 提供一系列内容电商直播产品，包括直播设备、软件和配件。",
         watchVideo: "观看产品视频",
-        testimonialsDesc: "听听我们的合作伙伴和网红如何评价全球公司的服务。",
-        testimonial1: "“全球公司的直播活动让我们的品牌在TikTok上大获成功，一场直播就吸引了100万观看量！” — Sarah L.，时尚品牌CEO",
-        testimonial2: "“他们的跨境物流让我们的产品轻松销往欧洲。全球公司真正点燃了全球商务！” — Mark T.，电子产品零售商",
-        testimonial3: "“与全球公司合作推广TikTok Shop改变了局面，他们的联盟计划让我们的销售额翻倍！” — Aisha K.，美妆网红",
+        testimonialsDesc: "听听我们满意的客户如何评价 Anwir Inc. 的内容电商直播解决方案。",
+        testimonial1: "“Anwir Inc. 的直播解决方案改变了我们的业务，增加了我们的销售和客户参与度。” — John D., 零售 CEO",
+        testimonial2: "“他们在内容电商直播方面的专业知识是无与伦比的。我们强烈推荐 Anwir Inc。” — Jane S., 营销总监",
+        testimonial3: "“与 Anwir Inc. 合作对我们的业务来说是一个转折点。他们的解决方案是一流的。” — Alex P., 电商经理",
         coopModel: "合作模式",
-        coopDesc: "让我们一起点燃世界！加入我们的直播活动、联盟计划和全球扩展战略，激发增长。",
-        coopCta: "准备好点燃您的品牌潜力了吗？与全球公司合作，推出病毒式TikTok活动，优化跨境销售，或举办吸引全球观众的直播活动。立即联系我们，探索合作机会！",
+        coopDesc: "与 Anwir Inc. 合作，将您的内容电商直播提升到新的水平。我们提供针对您业务需求的定制解决方案。",
+        coopCta: "准备好通过直播增强您的业务了吗？立即联系 Anwir Inc. 探索我们的解决方案。",
         contactUs: "联系我们",
         contactInfo: `
-          <div class="contact-item"><i class='fas fa-envelope contact-icon'></i> 邮箱: <a href='mailto:info@globalcorp.com' class='text-blue-600 hover:text-red-500'>info@globalcorp.com</a></div>
-          <div class="contact-item"><i class='fas fa-phone contact-icon'></i> 电话: <a href='tel:+11234567890' class='text-blue-600 hover:text-red-500'>+1-123-456-7890</a></div>
-          <div class="contact-item"><i class='fab fa-whatsapp contact-icon'></i> WhatsApp: <a href='https://wa.me/11234567891' target='_blank' class='text-blue-600 hover:text-red-500'>+1-123-456-7891</a></div>
-          <div class="contact-item"><i class='fab fa-linkedin contact-icon'></i> LinkedIn: <a href='https://linkedin.com/company/globalcorp' target='_blank' class='text-blue-600 hover:text-red-500'>linkedin.com/company/globalcorp</a></div>
-          <div class="contact-item"><i class='fab fa-tiktok contact-icon'></i> TikTok: <a href='https://tiktok.com/@globalcorp' target='_blank' class='text-blue-600 hover:text-red-500'>@globalcorp</a></div>
-          <div class="contact-item"><i class='fab fa-youtube contact-icon'></i> YouTube: <a href='https://youtube.com/@globalcorp' target='_blank' class='text-blue-600 hover:text-red-500'>@globalcorp</a></div>
+          <div class="contact-item"><i class='fas fa-envelope contact-icon'></i> 邮箱: <a href='mailto:anwirinc@gmail.com' class='text-blue-600 hover:text-red-500'>anwirinc@gmail.com</a></div>
+          <div class="contact-item"><i class='fas fa-phone contact-icon'></i> 电话: <a href='tel:+17146504577' class='text-blue-600 hover:text-red-500'>+1 (714) 650-4577</a></div>
+          <div class="contact-item"><i class='fab fa-whatsapp contact-icon'></i> WhatsApp: <a href='https://wa.me/17146504577' target='_blank' class='text-blue-600 hover:text-red-500'>+1 (714) 650-4577</a></div>
+          <div class="contact-item"><i class='fab fa-linkedin contact-icon'></i> LinkedIn: <a href='https://linkedin.com/company/anwirinc' target='_blank' class='text-blue-600 hover:text-red-500'>linkedin.com/company/anwirinc</a></div>
+          <div class="contact-item"><i class='fab fa-tiktok contact-icon'></i> TikTok: <a href='https://tiktok.com/@anwirinc' target='_blank' class='text-blue-600 hover:text-red-500'>@anwirinc</a></div>
+          <div class="contact-item"><i class='fab fa-youtube contact-icon'></i> YouTube: <a href='https://youtube.com/@anwirinc' target='_blank' class='text-blue-600 hover:text-red-500'>@anwirinc</a></div>
         `,
         learnMore: "了解更多",
         footer: {
           privacy: "隐私政策",
           terms: "使用条款",
-          cookies: "Cookie政策",
-          rights: "© 2025 全球公司。保留所有权利。",
-          privacyContent: "在全球公司，您的隐私是我们的首要任务。我们收集浏览历史、直播互动和购买详情等数据，以提升您在直播带货、跨境电商和TikTok Shop服务中的体验。我们安全处理运输和支付数据，遵守GDPR、CCPA和中国的PIPL。您可以随时管理数据偏好或选择退出数据共享。如有疑问，请通过privacy@globalcorp.com联系我们。最新更新：2025年5月28日。",
-          termsContent: "使用全球公司的服务即表示您同意我们的条款。我们提供直播带货、跨境电商和TikTok Shop整合服务，但不对第三方平台（如TikTok、YouTube）的中断负责。交易受我们的退货政策约束，国际订单可能产生海关费用。争议将在上海管辖区内解决。我们保留随时更新这些条款的权利。最新更新：2025年5月28日。",
-          cookiesContent: "我们使用Cookie为您的体验增添活力—追踪直播参与度，分析TikTok Shop表现，并个性化广告。必要Cookie确保跨境结账顺畅，而可选Cookie支持动态功能，如定向直播促销。您可以在Cookie设置中管理偏好或随时退出。最新更新：2025年5月28日。"
+          cookies: "Cookie 政策",
+          rights: "© 2025 Anwir Inc. 保留所有权利。",
+          privacyContent: "在 Anwir Inc.，我们重视您的隐私。我们收集数据以改善我们的服务并确保无缝体验。有关更多详情，请通过 privacy@anwirinc.com 联系我们。",
+          termsContent: "使用 Anwir Inc. 的服务即表示您同意我们的条款。我们提供直播解决方案，但不对第三方平台问题负责。有关完整条款，请联系我们。",
+          cookiesContent: "我们使用 Cookie 来增强您的体验。您可以在我们的设置中管理 Cookie 偏好。"
         }
       },
       ug: {
@@ -278,53 +239,53 @@
         testimonials: "خېرىدارلارنىڭ باھاسى",
         cooperation: "ھەمكارلىق",
         contactUsNav: "بىز بىلەن ئالاقىلىشىڭ",
-        companyName: "دۇنياۋى شىركەت",
-        intro: "2015-يىلىدىن بېرى، دۇنياۋى شىركەت دۇنياۋى سودىدا بىر پارلاق كۈچ بولۇپ، شاڭخەينىڭ جانلىق مەركىزىدە تۇغۇلدى. بىز تىك يايىم سودىسى، چەتئەل سودىسى ۋە TikTok Shop بىرلەشتۈرۈش ئارقىلىق سېتىش تەجرىبىسىنى ئۆزگەرتىشكە قىزىقىمىز. بىزنىڭ ۋەزىپىمىز دۇنيانى جانلىق، تېخنىكا قوزغىتىلغان تەجرىبەلەر بىلەن يورۇتۇش، AI تەھلىللىرى، سىلىق لوگىستىكا ۋە رەڭگارەڭ ئىجادچانلىق كۈچى بىلەن براندلار بىلەن خېرىدارلارنى باغلاش.",
-        vision: "بىز ھەر بىر كارخانىنىڭ جوشقۇنلۇق ۋە خۇشاللىق بىلەن پارقىرايدىغان، پارلاق، چېگراسىز بازارنى ئارزۇ قىلىمىز.",
-        techStrength: "AI، بىنالىق زەنجىر ۋە ھەرقانداق ۋاقىتتىكى تەھلىللەر بىلەن قوزغىتىلغان، بىز جوشقۇنلۇق ۋە يېڭىلىق يارىتىشنى قوزغايدىغان ھەل قىلىش چارىلىرى بىلەن تەمىنلەيمىز.",
-        crossBorder: "چەتئەل سودىسى",
-        crossBorderDesc: "بىز دۇنياۋى سودىنى جانلىق ئۈنۈم بىلەن ياندۇرىمىز—لوگىستىكا، كۆپ پۇل تۆرى قوللاش ۋە گۇمۇرۇك ھەل قىلىش چارىلىرى بىلەن خەلقئارالىق سېتىشنى تېخىمۇ قىزىقارلىق قىلىمىز.",
-        liveStreaming: "تىك يايىم سودىسى",
-        liveStreamingDesc: "TikTok ۋە YouTube دا تىك يايىم بىلەن سېتىشىڭىزنى ياندۇرۇڭ، ھەرقانداق ۋاقىتتا مەھسۇلات كۆرگەزمىسى بىلەن تاماشىبىنلارنى ھاياجانغا سالىدۇ.",
+        companyName: "Anwir Inc.",
+        intro: "Anwir Inc. مەزمۇن سودىسى تىك يايىم ساھەسىدىكى ئالدىنقى قاتاردىكى شىركەت، كارخانىلارنىڭ خېرىدارلار بىلەن ئ� chcą تەسىر كۆرسىتىش ئارقىلىق تىك يايىم ئارقىلىق ئالاقىلىشىشى ئۈچۈن يېڭىلىق يارىتىش ھەل قىلىش چارىلىرى بىلەن تەمىنلەيدۇ.",
+        vision: "بىز كارخانىلارنىڭ خېرىدارلار بىلەن ھەرقانداق ۋاقىتتا ئالاقىلىشالايدىغان، جەلپ قىلىش ۋە ئۆزئارا تەسىر كۆرسىتىش تەجرىبىسى يارىتالايدىغان دۇنيانى تەسەۋۋۇر قىلىمىز.",
+        techStrength: "ئالدىنقى قاتاردىكى تېخنىكىلارنى، جۈملىدىن AI ۋە ھەرقانداق ۋاقىتتىكى تەھلىللەرنى ئىشلىتىپ، بىز جەلپ قىلىش ۋە سېتىشنى قوزغايدىغان ھەل قىلىش چارىلىرى بىلەن تەمىنلەيمىز.",
+        crossBorder: "مەزمۇن سودىسى تىك يايىم",
+        crossBorderDesc: "Anwir Inc. تىك يايىم ياساش، تورداش ماركىتىڭ ۋە ھەرقانداق ۋاقىتتىكى تەھلىللەرنى ئۆز ئىچىگە ئالغان كەڭ دائىرىلىك مەزمۇن سودىسى تىك يايىم خىزمەتلىرى بىلەن تەمىنلەيدۇ.",
+        liveStreaming: "تىك يايىم ھەل قىلىش چارىلىرى",
+        liveStreamingDesc: "بىزنىڭ تىك يايىم ھەل قىلىش چارىلىرىمىز كارخانىلارنىڭ مەھسۇلاتلىرىنى ھەرقانداق ۋاقىتتا كۆرسىتىشىگە، خېرىدارلار بىلەن ئالاقىلىشىشىغا ۋە سېتىشنى قوزغىشىغا ياردەم بېرىدۇ.",
         liveStreamingLink: "بىزنىڭ تىك يايىمىمىزغا قوشۇلۇڭ: https://www.youtube.com/live/abc123",
-        tiktokCommerce: "TikTok سودىسى",
-        tiktokCommerceDesc: "TikTok Shop دا ۋىرۇسلۇق سىنلار ۋە ھەمكارلىق پروگراممىلىرى بىلەن يېڭى يۆنىلىشلەرنى ياندۇرۇڭ، رەڭگارەڭ ئېنېرگىيە بىلەن مىليونلىغان ئىشلەتكۈچىلەرگە يېتىڭ.",
+        tiktokCommerce: "ئىجتىمائىي ئالاقە تورى بىرلەشتۈرۈش",
+        tiktokCommerceDesc: "بىز داڭلىق ئىجتىمائىي ئالاقە تورى سۇپىلىرى بىلەن بىرلەشتۈرۈپ، سىزنىڭ تىك يايىمىڭىزنىڭ يېتىش دائىرىسى ۋە قاتنىشىشىنى ئەڭ يۇقىرى چەككە يەتكۈزىمىز.",
         achievements: "بىزنىڭ مۇۋەپپەقىيەتلىرىمىز",
-        achievementsDesc: "دۇنياۋى شىركەت 500 دىن ئارتۇق براندنى TikTok Shop دا پارقىراتتى، تىك يايىم پائالىيەتلىرى دۇنياۋى 10 مىليون تاماشىبىنغا يەتتى. بىزنىڭ چەتئەل سودا ھەل قىلىش چارىلىرىمىز 50 مىليون دوللارلىق خەلقئارالىق سېتىشنى يولغا قويدى، شاڭخەيدىن نيۇيوركقىچە بولغان بازارلارنى سىلىق لوگىستىكا ۋە AI قوزغىتىلغان چۈشەنچىلەر بىلەن باغلىدى.",
+        achievementsDesc: "Anwir Inc. يېڭىلىق يارىتىش تىك يايىم ھەل قىلىش چارىلىرىمىز ئارقىلىق نۇرغۇن كارخانىلارنىڭ سېتىشى ۋە خېرىدارلارنىڭ قاتنىشىشىنى ئاشۇرۇشىغا ياردەم بەردى.",
         productCategories: "مەھسۇلات تۈرلىرى",
-        productDesc: "بىزنىڭ پارلاق توپلىمىمىزغا شۇڭغۇڭ—فاشىيون، ئېلېكتىرونلۇق مەھسۇلاتلار ۋە گۈزەللىك مەھسۇلاتلىرى—دۇنياۋى بازارلارنى ھەيران قالدۇرۇش ئۈچün لايىھەلەنگەن.",
+        productDesc: "Anwir Inc. تىك يايىم ئۈسكۈنىلىرى، يۇمشاق دېتاللىرى ۋە قوشۇمچە بۇيۇملارنى ئۆز ئىچىگە ئالغان بىر قاتار مەزمۇن سودىسى تىك يايىم مەھسۇلاتلىرى بىلەن تەمىنلەيدۇ.",
         watchVideo: "مەھسۇلات سىنلىرىنى كۆرۈش",
-        testimonialsDesc: "بىزنىڭ ھەمكارلىرىمىز ۋە تورداشلارنىڭ دۇنياۋى شىركەتنىڭ پەرقىنى ھېس قىلغانلىقىنى ئاڭلاڭ.",
-        testimonial1: "“دۇنياۋى شىركەتنىڭ تىك يايىم پائالىيەتلىرى بىزنىڭ براندىمىزنى TikTok دا غايەت زور دەرىجىدە كۆرۈندى قىلدى. بىر قېتىملىق يايىمدا 1 مىليون كۆرۈش قېتىم سانىغا يەتتۇق!” — Sarah L.، فاشىيون براندى باشلىقى",
-        testimonial2: "“ئۇلارنىڭ چەتئەل لوگىستىكىسى مەھسۇلاتلىرىمىزنى ياۋروپاغا سېتىشنى ئاسانلاشتۇردى. دۇنياۋى شىركەت ھەقىقەتەن دۇنياۋى سودىنى ياندۇردى!” — Mark T.، ئېلېكتىرونلۇق مەھسۇلات ساتقۇچى",
-        testimonial3: "“TikTok Shop نى تەشۋىق قىلىش ئۈچۈن دۇنياۋى شىركەت بىلەن ھەمكارلىشىش بىر يېڭىلىق بولدى. ئۇلارنىڭ ھەمكارلىق پروگراممىسى بىزنىڭ سېتىشىمىزنى ئىككى ھەسسە كۆپەيتتى!” — Aisha K.، گۈزەللىك تورداشى",
+        testimonialsDesc: "Anwir Inc. نىڭ مەزمۇن سودىسى تىك يايىم ھەل قىلىش چارىلىرىنىڭ كۈچىنى ھېس قىلغان رازى بولغان خېرىدارلىرىمىزنىڭ پىكىرلىرىنى ئاڭلاڭ.",
+        testimonial1: "“Anwir Inc. نىڭ تىك يايىم ھەل قىلىش چارىلىرى بىزنىڭ كارخانىمىزنى ئۆزگەرتتى، سېتىشىمىزنى ۋە خېرىدارلارنىڭ قاتنىشىشىنى ئاشۇردى.” — John D., پارچە سېتىش CEO",
+        testimonial2: "“ئۇلارنىڭ مەزمۇن سودىسى تىك يايىم ساھەسىدىكى مۇتەخەسسىسلىكى تەڭداشسىز. بىز Anwir Inc. نى كۈچلۈك تەۋسىيە قىلىمىز.” — Jane S., ماركىتىڭ دىرېكتورى",
+        testimonial3: "“Anwir Inc. بىلەن ھەمكارلىشىش بىزنىڭ كارخانىمىز ئۈچۈن بىر يېڭىلىق بولدى. ئۇلارنىڭ ھەل قىلىش چارىلىرى ئالىي دەرىجىلىك.” — Alex P., ئېلېكتىرونلۇق سودا باشقۇرغۇچى",
         coopModel: "ھەمكارلىق شەكلى",
-        coopDesc: "كېلىڭ، دۇنيانى بىرلىكتە ياندۇرايلى! تىك يايىم پائالىيەتلىرى، ھەمكارلىق پروگراممىلىرى ۋە دۇنياۋى كېڭەيتىش ئىستراتېگىيەلىرى ئارقىلىق بىزگە قوشۇلۇپ، ئۆسۈشنى قوزغايلى.",
-        coopCta: "براندىڭىزنىڭ يوشۇرۇن كۈچىنى ياندۇرۇشقا تەييارمۇ؟ دۇنياۋى شىركەت بىلەن ھەمكارلىشىپ، ۋىرۇسلۇق TikTok پائالىيەتلىرىنى باشلاڭ، چەتئەل سېتىشنى ئەلالاشتۇرۇڭ ياكى دۇنياۋى تاماشىبىنلارنى جەلپ قىلىدىغان تىك يايىم پائالىيەتلىرىنى ئۆتكۈزۈڭ. بۈگۈن بىز بىلەن ئالاقىلىشىپ، ھەمكارلىق پۇرسەتلىرىنى كۆرۈڭ!",
+        coopDesc: "Anwir Inc. بىلەن ھەمكارلىشىپ، مەزمۇن سودىسى تىك يايىمىڭىزنى يېڭى بىر قاتارغا يەتكۈزۈڭ. بىز سىزنىڭ كارخانا ئېھتىياجىڭىزغا ماس كېلىدىغان خاسلاشتۇرۇلغان ھەل قىلىش چارىلىرى بىلەن تەمىنلەيمىز.",
+        coopCta: "تىك يايىم ئارقىلىق كارخانىڭىزنى كۈچەيتىشكە تەييارمۇ؟ بۈگۈن Anwir Inc. بىلەن ئالاقىلىشىپ، بىزنىڭ ھەل قىلىش چارىلىرىمىزنى كۆرۈڭ.",
         contactUs: "بىز بىلەن ئالاقىلىشىڭ",
         contactInfo: `
-          <div class="contact-item"><i class='fas fa-envelope contact-icon'></i> ئېلخەت: <a href='mailto:info@globalcorp.com' class='text-blue-600 hover:text-red-500'>info@globalcorp.com</a></div>
-          <div class="contact-item"><i class='fas fa-phone contact-icon'></i> تېلېفون: <a href='tel:+11234567890' class='text-blue-600 hover:text-red-500'>+1-123-456-7890</a></div>
-          <div class="contact-item"><i class='fab fa-whatsapp contact-icon'></i> WhatsApp: <a href='https://wa.me/11234567891' target='_blank' class='text-blue-600 hover:text-red-500'>+1-123-456-7891</a></div>
-          <div class="contact-item"><i class='fab fa-linkedin contact-icon'></i> LinkedIn: <a href='https://linkedin.com/company/globalcorp' target='_blank' class='text-blue-600 hover:text-red-500'>linkedin.com/company/globalcorp</a></div>
-          <div class="contact-item"><i class='fab fa-tiktok contact-icon'></i> TikTok: <a href='https://tiktok.com/@globalcorp' target='_blank' class='text-blue-600 hover:text-red-500'>@globalcorp</a></div>
-          <div class="contact-item"><i class='fab fa-youtube contact-icon'></i> YouTube: <a href='https://youtube.com/@globalcorp' target='_blank' class='text-blue-600 hover:text-red-500'>@globalcorp</a></div>
+          <div class="contact-item"><i class='fas fa-envelope contact-icon'></i> ئېلخەت: <a href='mailto:anwirinc@gmail.com' class='text-blue-600 hover:text-red-500'>anwirinc@gmail.com</a></div>
+          <div class="contact-item"><i class='fas fa-phone contact-icon'></i> تېلېفون: <a href='tel:+17146504577' class='text-blue-600 hover:text-red-500'>+1 (714) 650-4577</a></div>
+          <div class="contact-item"><i class='fab fa-whatsapp contact-icon'></i> WhatsApp: <a href='https://wa.me/17146504577' target='_blank' class='text-blue-600 hover:text-red-500'>+1 (714) 650-4577</a></div>
+          <div class="contact-item"><i class='fab fa-linkedin contact-icon'></i> LinkedIn: <a href='https://linkedin.com/company/anwirinc' target='_blank' class='text-blue-600 hover:text-red-500'>linkedin.com/company/anwirinc</a></div>
+          <div class="contact-item"><i class='fab fa-tiktok contact-icon'></i> TikTok: <a href='https://tiktok.com/@anwirinc' target='_blank' class='text-blue-600 hover:text-red-500'>@anwirinc</a></div>
+          <div class="contact-item"><i class='fab fa-youtube contact-icon'></i> YouTube: <a href='https://youtube.com/@anwirinc' target='_blank' class='text-blue-600 hover:text-red-500'>@anwirinc</a></div>
         `,
         learnMore: "تېخىمۇ كۆپ بىلىم ئېلىش",
         footer: {
           privacy: "مەخپىيەتلىك سىياسىتى",
           terms: "ئىشلىتىش شەرتلىرى",
           cookies: "Cookie سىياسىتى",
-          rights: "© 2025 دۇنياۋى شىركەت. ھەممە ھوقۇق قوغدىلىدۇ.",
-          privacyContent: "دۇنياۋى شىركەتتە، سىزنىڭ مەخپىيەتلىكىڭىز بىزنىڭ ئەڭ مۇھىم ئىشىمىز. بىز سىزنىڭ كۆرۈش تارىخى، تىك يايىم ئىنكاسلىرى ۋە سېتىۋېلىش تەپسىلاتلىرى قاتارلىق سانلىق مەلۇماتلارنى يىغىپ، تىك يايىم سودىسى، چەتئەل سودىسى ۋە TikTok Shop خىزمەتلىرىدىكى تەجرىبىڭىزنى يۇقىرى كۆتۈرىمىز. بىز يەتكۈزۈش ۋە پۇل تۆلەش سانلىق مەلۇماتلىرىنى بىخەتەر باشقۇرىمىز، GDPR، CCPA ۋە جۇڭگونىڭPIPL غا ماسلىشىمىز. سىز ھەر ۋاقىت سانلىق مەلۇمات تەڭشەكلىرىڭىزنى باشقۇرالايسىز ياكى ئورتاقلىشىشتىن چىكىنەلەيسىز. سۇئاللار ئۈچۈن، privacy@globalcorp.com ئارقىلىق بىز بىلەن ئالاقىلىشىڭ. ئەڭ يېڭى يېڭىلانما: 2025-يىلى 5-ئاينىڭ 28-كۈنى.",
-          termsContent: "دۇنياۋى شىركەتنىڭ خىزمەتلىرىگە قاتنىشىش بىلەن، سىز بىزنىڭ شەرتلىرىمىزگە قوشۇلىسىز. بىز تىك يايىم سودىسى، چەتئەل سودىسى ۋە TikTok Shop بىرلەشتۈرۈش خىزمەتلىرى بىلەن تەمىنلەيمىز، ئەمما ئۈچىنچى تەرەپ سۇپىلىرى (مەسىلەن، TikTok، YouTube) نىڭ بۇزۇلۇشىغا مەسئۇل بولمايمىز. سېتىش-ئېلىشلار بىزنىڭ قايتۇرۇش سىياسىتىمىزگە بويسۇنۇپ، خەلقئارالىق زاكازلار گۇمۇرۇك ھەققى كەلتۈرۈپ چىقىرىشى مۇمكىن. كېلىشمەسلىكلەر شاڭخەي ھۆكۈمەت رايونىدا ھەل قىلىنىدۇ. بىز بۇ شەرتلەرنى زۆرۈر تېپىلغاندا يېڭىلاش ھوقۇقىغا ئىگە. ئەڭ يېڭى يېڭىلانما: 2025-يىلى 5-ئاينىڭ 28-كۈنى.",
-          cookiesContent: "بىز سىزنىڭ تەجرىبىڭىزنى جانلاندۇرۇش ئۈچۈن Cookie لارنى ئىشلىتىمىز—تىك يايىم قاتنىشىشنى كۆزىتىش، TikTok Shop نىڭ ئىقتىدارىنى تەھلىل قىلىش ۋە خاس ئېلانلارنى كۆرسىتىش. لازىملىق Cookie لار چەتئەلدىكى پۇل تۆلەش جەريانىمىزنى سىلىق ئىشلىشىگە كاپالەتلىك قىلىدۇ، ئىختىيارى Cookie لار يۆنىلىشلىك تىك يايىم تەشۋىقاتلىرى قاتارلىق جانلىق ئىقتىدارلارنى قوزغىتىدۇ. Cookie تەڭشەكلىرىمىزدىن تاللىشىڭىزنى باشقۇرۇڭ ياكى ھەر ۋاقىت چىكىنەلەيسىز. ئەڭ يېڭى يېڭىلانما: 2025-يىلى 5-ئاينىڭ 28-كۈنى."
+          rights: "© 2025 Anwir Inc. ھەممە ھوقۇق قوغدىلىدۇ.",
+          privacyContent: "Anwir Inc. دە، بىز سىزنىڭ مەخپىيەتلىكىڭىزنى قەدىرلەيمىز. بىز سانلىق مەلۇماتلارنى يىغىپ، خىزمەتلىرىمىزنى ياخشىلايمىز ۋە سىلىق تەجرىبىنى كاپالەتلەندۈرىمىز. تېخىمۇ كۆپ تەپسىلاتلار ئۈچۈن، privacy@anwirinc.com ئارقىلىق بىز بىلەن ئالاقىلىشىڭ.",
+          termsContent: "Anwir Inc. نىڭ خىزمەتلىرىنى ئىشلىتىش بىلەن، سىز بىزنىڭ شەرتلىرىمىزگە قوشۇلىسىز. بىز تىك يايىم ھەل قىلىش چارىلىرى بىلەن تەمىنلەيمىز، ئەمما ئۈچىنچى تەرەپ سۇپىلىرىنىڭ مەسىلىلىرىگە مەسئۇل بولمايمىز. تولۇق شەرتلەر ئۈچۈن، بىز بىلەن ئالاقىلىشىڭ.",
+          cookiesContent: "بىز سىزنىڭ تەجرىبىڭىزنى يۇقىرى كۆتۈرۈش ئۈچۈن Cookie لارنى ئىشلىتىمىز. سىز بىزنىڭ تەڭشەكلىرىمىزدىن Cookie تاللىشىڭىزنى باشقۇرالايسىز."
         }
-      },
+      }
     };
 
     const App = () => {
-      const [language, setLanguage] = useState('en');
+      const [language, setLanguage] = useState('en'); // 默认语言为英语
       const t = translations[language];
 
       const scrollToSection = (sectionId) => {
@@ -332,15 +293,15 @@
       };
 
       const productImages = [
-        "https://images.unsplash.com/photo-1600585154347-be4b2b2b2b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80", // Fashion
-        "https://images.unsplash.com/photo-1581235720704-be4b2b2b2b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80", // Electronics
-        "https://images.unsplash.com/photo-1596755094514-be4b2b2b2b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80", // Beauty
+        "https://images.unsplash.com/photo-1600585154347-be4b2b2b2b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        "https://images.unsplash.com/photo-1581235720704-be4b2b2b2b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        "https://images.unsplash.com/photo-1596755094514-be4b2b2b2b2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
       ];
 
       const serviceImages = [
-        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80", // Cross-border (logistics)
-        "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80", // Live streaming
-        "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80", // TikTok commerce
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+        "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
       ];
 
       useEffect(() => {
@@ -363,7 +324,6 @@
 
       return (
         <div className="snap-y snap-mandatory overflow-y-scroll h-screen">
-          {/* Navigation */}
           <nav className="fixed top-0 left-0 w-full bg-opacity-90 bg-white p-4 flex justify-between items-center z-10 shadow-lg">
             <h1 className="text-2xl font-bold text-red-500">{t.companyName}</h1>
             <div className="flex space-x-3">
@@ -385,7 +345,6 @@
             </div>
           </nav>
 
-          {/* Home Section */}
           <section
             id="home"
             className="section"
@@ -405,7 +364,6 @@
             </div>
           </section>
 
-          {/* Business Section */}
           <section
             id="business"
             className="section"
@@ -415,12 +373,12 @@
               <h2 className="text-3xl font-bold mb-8 text-orange-500">{t.business}</h2>
               <div className="business-grid">
                 <div className="interactive-card">
-                  <img src={serviceImages[0]} alt="Cross-Border" className="service-image" />
+                  <img src={serviceImages[0]} alt="Live Streaming Production" className="service-image" />
                   <h3 className="text-xl font-semibold mb-2 text-yellow-600">{t.crossBorder}</h3>
                   <p>{t.crossBorderDesc}</p>
                 </div>
                 <div className="interactive-card">
-                  <img src={serviceImages[1]} alt="Live Streaming" className="service-image" />
+                  <img src={serviceImages[1]} alt="Live Streaming Solutions" className="service-image" />
                   <h3 className="text-xl font-semibold mb-2 text-yellow-600">{t.liveStreaming}</h3>
                   <p>{t.liveStreamingDesc}</p>
                   <a href={t.liveStreamingLink} target="_blank" className="text-blue-600 hover:text-red-500 mt-2 block">
@@ -428,7 +386,7 @@
                   </a>
                 </div>
                 <div className="interactive-card">
-                  <img src={serviceImages[2]} alt="TikTok Commerce" className="service-image" />
+                  <img src={serviceImages[2]} alt="Social Media Integration" className="service-image" />
                   <h3 className="text-xl font-semibold mb-2 text-yellow-600">{t.tiktokCommerce}</h3>
                   <p>{t.tiktokCommerceDesc}</p>
                 </div>
@@ -440,7 +398,6 @@
             </div>
           </section>
 
-          {/* Products Section */}
           <section
             id="products"
             className="section"
@@ -456,23 +413,22 @@
                   </div>
                 ))}
                 <div className="interactive-card">
-                        <iframe
-                          width="100%"
-                          height="200"
-                          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                          title="Product Video"
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                        ></iframe>
+                  <iframe
+                    width="100%"
+                    height="200"
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    title="Product Video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Testimonials Section */}
           <section
             id="testimonials"
             className="section"
@@ -495,7 +451,6 @@
             </div>
           </section>
 
-          {/* Cooperation Section */}
           <section
             id="cooperation"
             className="section"
@@ -517,7 +472,6 @@
             </div>
           </section>
 
-          {/* Footer Section */}
           <footer className="bg-white bg-opacity-90 p-6 text-center shadow-lg">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
               <div>
